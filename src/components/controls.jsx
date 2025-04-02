@@ -1,33 +1,24 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { counterAction } from "../store";
 
 const Controls = () => {
   const addElement = useRef();
 
   const dispatch = useDispatch();
   const handleIncreament = () => {
-    dispatch({ type: "INCREAMENT" });
+    dispatch(counterAction.increament());
   };
   const handledecreament = () => {
-    dispatch({ type: "DECREMENT" });
+    dispatch(counterAction.decreament());
   };
-  const handleAdd = (num) => {
-    dispatch({
-      type: "ADD",
-      payload: {
-        num: addElement.current.value,
-      },
-    });
+  const handleAdd = () => {
+    dispatch(counterAction.add(addElement.current.value));
     addElement.current.value = "";
   };
 
-  const handlesubtract = (num) => {
-    dispatch({
-      type: "SUBSTRACT",
-      payload: {
-        num: addElement.current.value,
-      },
-    });
+  const handlesubtract = () => {
+    dispatch(counterAction.subtract(addElement.current.value));
     addElement.current.value = "";
   };
 
@@ -65,7 +56,7 @@ const Controls = () => {
         <button
           type="button"
           className="btn btn-warning"
-          onClick={handlesubtract }
+          onClick={handlesubtract}
         >
           SUBSTRACT
         </button>
